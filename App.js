@@ -6,11 +6,16 @@
 
 import React, { Component } from 'react';
 import {
+  StatusBar,
+  Image,
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  ScrollView,
 } from 'react-native';
+
+import Row from './src/Row.js'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -19,20 +24,38 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <StatusBar
+          barStyle="light-content"
+        />
+        <View 
+          style = {{
+            alignItems   : 'center',
+            shadowOpacity: 0.3,
+            shadowRadius : 5,
+            shadowColor  : 'black',
+            shadowOffset : { height: 10, width: 0 },
+            zIndex       : 1,
+          }}
+        >
+        <Image
+          source={require('./images/Banner.png')}
+          style  = {{
+            height: 70,
+            resizeMode: 'contain',
+          }}
+        />
+        </View>
+        <ScrollView
+          style={styles.scrollView}
+        >
+          <Row zIndex={100} />
+          <Row zIndex={100} />
+          <Row zIndex={100} />
+        </ScrollView>
       </View>
     );
   }
@@ -41,8 +64,6 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   welcome: {
@@ -54,5 +75,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  scrollView: {
+    backgroundColor: '#4A637D',
+    flex: 1,
+    padding: 10,
   },
 });
